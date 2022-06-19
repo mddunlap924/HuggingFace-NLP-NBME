@@ -80,7 +80,7 @@ def get_results(char_probs, th=0.5):
 
 
 # The following is necessary if you want to use the fast tokenizer for deberta v2 or v3
-# This must be done before importing transformers
+# This must be done before importing transformers hey
 import shutil
 from pathlib import Path
 

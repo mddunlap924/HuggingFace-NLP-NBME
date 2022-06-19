@@ -141,17 +141,6 @@ if __name__ == '__main__':
     """ Seed Everything """
     hfu.seed_all(CFG.seed)
 
-    # """ Load Data from Disk with Some PreProcessing """
-    # if CFG.pseudo_labels.apply:
-    #     train, features, patient_notes = hfl.load_csv_preprocess_pseudo(data_path=DATA_PATH,
-    #                                                                     filename=CFG.pseudo_labels.filename)
-    # else:
-    #     train, features, patient_notes = hfl.load_csv_preprocess(data_path=DATA_PATH)
-    #
-    # """ Split Data into Training and Validation Folds """
-    # if CFG.cv_split == 'groupkfold':
-    #     train = split_data.groupkfold(train=train, n_splits=CFG.num_folds)
-
     """ Tokenizer """
     if ("v3" in CFG.model) and ('v2' not in CFG.model):
         tokenizer_path = INPUT_PATH / CFG.model
@@ -205,9 +194,7 @@ if __name__ == '__main__':
                 else:
                     train_folds = pd.concat([train_folds, pseudo_data]).reset_index(drop=True)
             else:
-                # drop_columns = ['index', 'labeled', 'inf_location']
                 pseudo_data = patient_notes.copy()
-                # pseudo_data.drop(columns=drop_columns, inplace=True)
                 pseudo_data['annotation'] = pseudo_data['annotation'].apply(ast.literal_eval)
                 pseudo_data['location'] = pseudo_data['location'].apply(ast.literal_eval)
                 if CFG.pseudo_labels.split is not False:
@@ -219,7 +206,6 @@ if __name__ == '__main__':
                         train_folds = pd.concat([train_folds, pseudo_data]).reset_index(drop=True)
                 else:
                     train_folds = pd.concat([train_folds, pseudo_data]).reset_index(drop=True)
-                    # train_folds = pseudo_data.copy().reset_index(drop=True)
 
             # Check if same id are in train_folds and val_folds
             if np.size(np.intersect1d(train_folds.id.to_numpy(), val_folds.id.to_numpy())) == 0:
@@ -241,12 +227,7 @@ if __name__ == '__main__':
                 mode=CFG.checkpoint.monitor.mode,
                 save_last=True,
             )
-            # checkpoint_callback = PeriodicCheckpoint(
-            #     dirpath=ckpt_save_path,
-            #     monitor=CFG.checkpoint.monitor.metric,
-            #     mode=CFG.checkpoint.monitor.mode,
-            #     save_last=False,
-            # )
+
             """ Learning Rate Monitor """
             lr_monitor = LearningRateMonitor(logging_interval='step')
             callbacks = [checkpoint_callback, lr_monitor]
@@ -332,7 +313,9 @@ if __name__ == '__main__':
             file.close()
             wandb.finish()
             api = wandb.Api()
-            run = api.run("/".join(['mdunlap', wb_logger.name, wb_logger.version]))
+            run = api.run("/".join([WANDB_USER_NAME,
+                                    wb_logger.name,
+                                    wb_logger.version]))
             run.summary['best_f1'] = best_model_score
             run.summary['best_model_save_name'] = best_model_path.split('/')[-1]
             run.summary['pseudo_labels_apply'] = CFG.pseudo_labels.apply
@@ -348,7 +331,6 @@ if __name__ == '__main__':
         gc.collect()
 
         """ Load Best Model and Perform Inference to Double-Check Results """
-        # ckpt_save_path = './input/nbme-2aunokus/2aunokus_f358lssg'
         config_path = [file for file in os.listdir(ckpt_save_path) if '.yaml' in file][0]
         config_path = os.path.join(ckpt_save_path, config_path)
 
@@ -389,7 +371,6 @@ if __name__ == '__main__':
               f'automodel_path: {ckpt_path}\n')
         CFG_INF.autoconfig_path = autoconfig_path
         CFG_INF.automodel_path = automodel_path
-        # nbme_model = BaseLineModel.load_from_checkpoint(ckpt_path)
         nbme_model = BaseLineModel.load_from_checkpoint(ckpt_path,
                                                         autoconfig_path=autoconfig_path,
                                                         automodel_path=ckpt_path)
@@ -429,7 +410,6 @@ if __name__ == '__main__':
         for th in np.arange(0.45, 0.55, 0.01):
             th = np.round(th, 2)
             val_results = get_results(char_probs, th=th)
-            # val_results = get_results(predictions, th=0.5)
             val_results_ = []
             for val_result in val_results:
                 if val_result == "":

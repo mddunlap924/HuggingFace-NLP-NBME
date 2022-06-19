@@ -1,0 +1,23 @@
+python3 main_R4.py cfg0.yaml &&
+wait
+sleep 10
+
+python3 main_R4.py cfg1.yaml &&
+wait
+sleep 10
+#
+#python3 main.py cfg2.yaml &&
+#wait
+#sleep 10
+#
+#python3 main.py cfg3.yaml &&
+#wait
+#sleep 10
+#
+#python3 main.py cfg4.yaml &&
+#wait
+#sleep 10
+#
+#python3 main.py cfg5.yaml &&
+#wait
+#sleep 10

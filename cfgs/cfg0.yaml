@@ -1,0 +1,43 @@
+wandb_project: 'ScoreClinicalNotes'
+seed: 42
+limit_train_batches: 1.0
+num_workers: 8
+precision: 16
+max_len: 512
+num_folds: 5
+trn_fold: [0]
+batch_size: 4
+check_n_steps: 7_500
+abbreviations: False
+pseudo_labels:
+  apply: True
+  regex: False
+  filename: 'train_inf_pn_th45_foldXYZ.csv'
+  split: 4
+  only_baseline: False
+debug: False
+fc_dropout: 0.15
+checkpoint:
+  monitor:
+    metric: val_avg_f1
+    mode: max
+  continue_training: False
+  group_id: '2dvfpcuz'
+model_base: 'deberta'
+model: "microsoft/deberta-v3-large"
+schedule:
+  name: 'cosine' # ['linear', 'cosine']
+  num_warmup_steps: 5_000
+  num_cycles: 0.5
+  layer_select: 'option0'
+epochs: 1
+cv_split: 'groupkfold' # ['groupkfold', 'stratifiedkfold']
+optimizer:
+  name: AdamW
+  initial_lr: 1.1E-5
+  epsilon: 1.0E-6
+  weight_decay: 0.01
+  encoder_lr: 5.0E-6
+  decoder_lr: 5.0E-6
+
+

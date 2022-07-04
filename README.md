@@ -4,7 +4,11 @@ A state-of-the-art natural language processing (NLP) model is trained on a custo
 
 
 
-The following example shows a visualization of NER predictions for a dataset. 
+In the below images annotations and NER visualizations are shown using the 
+
+[spaCy]: https://spacy.io/
+
+ package. Annotations were performed by practicioners or subject matter experts (SMEs). The annotations can be visualized using spaCy Datasets were annotated by multiple practicioners or subject matter experts and therefore some annotations are repeated.
 
 ![](https://github.com/mddunlap924/HuggingFace-NLP-NBME/blob/main/imgs/annotated_text.png)
 

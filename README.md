@@ -1,8 +1,12 @@
-# Hugging-Face-NLP-NBME
+# NLP using HuggingFace: Named Entity Recognition (NER)
 ## Introduction
-A state-of-the-art natural language processing (NLP) model is trained on a custom labeled dataset with the objective of extracting sub-text for given features. The model was developed using the Transformers from the Hugging Face API [[1](https://huggingface.co/docs/transformers/index)]. The objective of this model is to perform named-entity recognition (NER) [[2](https://en.wikipedia.org/wiki/Named-entity_recognition)] by locating character spans for predefined categories in unstructured text.  In this specific example, the data and scripts are from a subset of the files I created when competing in the National Board of Medical Examiners (NBME) - Score Clinical Patients Notes competition on Kaggle [[3](https://www.kaggle.com/competitions/nbme-score-clinical-patient-notes)].
+A state-of-the-art natural language processing (NLP) model is trained on a custom labeled dataset with the objective of extracting sub-text for given features. The model was developed using the Transformers from the Hugging Face API [[1](https://huggingface.co/docs/transformers/index)]. The model performs named-entity recognition (NER) [[2](https://en.wikipedia.org/wiki/Named-entity_recognition)] by locating character spans for predefined categories in unstructured text.  This repository contains a subset of scripts and data I created when competing in the National Board of Medical Examiners (NBME) - Score Clinical Patients Notes competition on Kaggle [[3](https://www.kaggle.com/competitions/nbme-score-clinical-patient-notes)].
+
+
 
 The following example shows a visualization of NER predictions for a dataset. 
+
+![](https://github.com/mddunlap924/HuggingFace-NLP-NBME/blob/main/imgs/annotated_text.png)
 
 show ner predictions here
 

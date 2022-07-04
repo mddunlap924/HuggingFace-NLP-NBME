@@ -6,13 +6,13 @@ In the below images annotations and NER visualizations are shown using [spaCy](h
 
 ![](https://github.com/mddunlap924/HuggingFace-NLP-NBME/blob/main/imgs/annotated_text.png)
 
-In the below example  the spaCy "en_core_web_sm" english pipeline is used to perform a NER task. This pretrained pipeline consists of tok2vec, tagger, parser, ner, etc. In the below image named entities are assigned such as date, organization, cardinal, etc. Please note this pretrained model is not optimized to find the character spans for the labeled features and is simply a NER visualization example.
+In the below example  the spaCy [en_core_web_sm](https://spacy.io/models/en) english pipeline is used to perform a NER task. This pretrained pipeline consists of tok2vec, tagger, parser, ner, etc. In the below image named entities are assigned such as date, organization, cardinal, etc. Please note this pretrained model is not optimized to find the character spans for the labeled features and is simply a NER visualization example.
 
 ![](https://github.com/mddunlap924/HuggingFace-NLP-NBME/blob/main/imgs/visualize_ner.png)
 
 ## Custom Training and Fine-Tuning a Transformer Model
 
-The "train.py" script can be used as a generic workflow for building and tuning customized NER models using the HuggingFace API. A baseline [Microsoft deberta-large-v3](https://huggingface.co/microsoft/deberta-v3-large) model was fine-tuned on the labeled dataset by using a [PyTorch Lightning](https://www.pytorchlightning.ai/) (PL). The PL model for training can be [models.py](https://github.com/mddunlap924/HuggingFace-NLP-NBME/blob/main/nlp/models.py) and the snippet of code showing how to setup the model, forward function, and features are shown below. Other scripts are in the "nlp" folder to help with creating the datasets and dataloaders for efficient data intake and processing.
+The [training.py](https://github.com/mddunlap924/HuggingFace-NLP-NBME/blob/main/training.py) script can be used as a generic workflow for building and tuning customized NER models using the HuggingFace API. A baseline [Microsoft deberta-large-v3](https://huggingface.co/microsoft/deberta-v3-large) model was fine-tuned on the labeled dataset by using a [PyTorch Lightning](https://www.pytorchlightning.ai/) (PL). The PL model for training can be [models.py](https://github.com/mddunlap924/HuggingFace-NLP-NBME/blob/main/nlp/models.py) and the snippet of code showing how to setup the model, forward function, and features are shown below. Other scripts are in the "nlp" folder to help with creating the datasets and dataloaders for efficient data intake and processing.
 
 ```python
 class BaseLineModel(pl.LightningModule):
@@ -59,7 +59,7 @@ class BaseLineModel(pl.LightningModule):
         return outs
 ```
 
-Typically, I setup a base execution of my training scripts so I can let the computer run continously. I find this helps with efficient use of my time because I can work on other tasks or leave the computer running for days while allowing for flexible training customizations. Training is customized by use of YAML configuration file found in the [cfg](https://github.com/mddunlap924/HuggingFace-NLP-NBME/tree/main/cfgs) folder. Execution of the configuration files is performed using the [execute_training_cfgs.sh](https://github.com/mddunlap924/HuggingFace-NLP-NBME/blob/main/execute_training_cfgs.sh) file using the below code. This workflow allows for lots of flexibility and customization during training. The training logs and metrics of interest are logged using [Weights and Biases](https://wandb.ai/site). 
+Typically, I setup a bash execution for training so the computer can run continuously. This is very helpful with efficient use of your time because it allows you to work on other tasks and/or leave the computer running for days while still training flexible/customizable routines. Training is customized by use of YAML configuration files found in the [cfg](https://github.com/mddunlap924/HuggingFace-NLP-NBME/tree/main/cfgs) folder. Execution of the configuration files is performed using a simple bash script ([execute_training_cfgs.sh](https://github.com/mddunlap924/HuggingFace-NLP-NBME/blob/main/execute_training_cfgs.sh)) as shown in the below snippet. This workflow allows for lots of flexibility and customization during training. The training logs and metrics of interest are logged using [Weights and Biases](https://wandb.ai/site). 
 
 ```shell
 # Bash script to execute customized model training.

@@ -115,4 +115,3 @@ def get_predictions(results):
 def get_score(y_true, y_pred):
     score = span_micro_f1(y_true, y_pred)
     return score
-

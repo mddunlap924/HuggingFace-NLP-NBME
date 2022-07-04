@@ -11,13 +11,6 @@ from pytorch_lightning import loggers as pl_loggers
 import wandb
 
 
-# class Dict2Class(object):
-#     """" Turns a dictionary into a class """
-#     def __init__(self, my_dict):
-#         for key in my_dict:
-#             setattr(self, key, my_dict[key])
-
-
 def dict2obj(d):
     # checking whether object d is a
     # instance of class list

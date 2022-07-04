@@ -142,23 +142,7 @@ def mergeIntervals(arr):
 
     if max != -100000 and [s, max] not in m:
         m.append([s, max])
-    # print("The Merged Intervals are :", end=" ")
-    # for i in range(len(m)):
-    #     print(m[i], end=" ")
     return m
-
-
-# def mergeIntervals(intervals):
-#     if len(intervals) == 0 or len(intervals) == 1:
-#         return intervals
-#     intervals.sort(key=lambda x:x[0])
-#     result = [intervals[0]]
-#     for interval in intervals[1:]:
-#         if interval[0] <= result[-1][1]:
-#             result[-1][1] = max(result[-1][1], interval[1])
-#         else:
-#             result.append(interval)
-#     return result
 
 
 class Solution(object):
@@ -236,7 +220,6 @@ if __name__ == '__main__':
     # https://huggingface.co/docs/transformers/installation#offline-mode
     """ Load CFG """
     cfg_name = 'cfg0.yaml'
-    # cfg_name = sys.argv[1]
     CFG = hfu.load_cfg(filename=cfg_name)
     debug = CFG.debug
     del CFG.debug
@@ -251,9 +234,6 @@ if __name__ == '__main__':
     """ Split Data into Training and Validation Folds """
     if CFG.cv_split == 'groupkfold':
         train = split_data.groupkfold(train=train, n_splits=5)
-
-    # """ Load Best Model and Perform Inference to Double-Check Results """
-    # MODEL = MODELS[0]
 
     """ List all models and files for prediction """
     all_model_files = []
@@ -291,9 +271,6 @@ if __name__ == '__main__':
             file.close()
             CFG_INF = dict2obj(CFG_INF)
             CFG_INF.batch_size = 32
-            # fold = CFG_INF.fold
-
-            # val_folds = train.copy().iloc[0:500]
 
             # Tokenizer
             if ("v3" in CFG_INF.model) or ('v2' not in CFG_INF.model):
@@ -401,7 +378,6 @@ if __name__ == '__main__':
         else:
             train_final = pd.concat([train_final, train_inf])
         del train_inf
-        # train_update = pd.merge(train_update, train_inf[cols_to_use], left_index=True, right_index=True, how='outer')
         print('check point')
     train_final.sort_index(inplace=True)
     train_final.to_csv(Path('./input') / 'pseudo_label' / f'train_inf_val_folds_{TH}.csv', index=False)

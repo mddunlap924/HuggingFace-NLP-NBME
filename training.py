@@ -1,3 +1,4 @@
+""" Script used to train custom NER models """
 import helper_fns.utils as hfu
 import helper_fns.load as hfl
 from helper_fns import split_data
@@ -129,11 +130,10 @@ class PeriodicCheckpoint(ModelCheckpoint):
 
 
 if __name__ == '__main__':
-
     # https://huggingface.co/docs/transformers/installation#offline-mode
     """ Load CFG """
-    cfg_name = 'cfg0.yaml'
-    # cfg_name = sys.argv[1]
+    # cfg_name = 'cfg0.yaml'
+    cfg_name = sys.argv[1]
     CFG = hfu.load_cfg(filename=cfg_name)
     debug = CFG.debug
     del CFG.debug
@@ -288,6 +288,7 @@ if __name__ == '__main__':
                              precision=CFG.precision,
                              )
         trainer.fit(model, datamodule=dm)
+        # Learning Rate Finder
         # lr_finder = trainer.tuner.lr_find(model, dm, num_training=750)
         # lr_finder.results
         # fig = lr_finder.plot(suggest=True)
@@ -441,7 +442,9 @@ if __name__ == '__main__':
         if not debug:
             print('Entered into Logging Summary')
             api = wandb.Api()
-            run = api.run("/".join(['mdunlap', wb_logger.name, wb_logger.version]))
+            run = api.run("/".join([WANDB_USER_NAME, 
+                                    wb_logger.name, 
+                                    wb_logger.version]))
             run.summary['f1_inf'] = val_score
             run.summary['best_th'] = best_th
             run.summary['best_th_score'] = best_score

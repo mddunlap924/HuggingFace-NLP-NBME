@@ -53,8 +53,7 @@ def create_label(cfg, text, annotation_length, location_list):
                     start_idx = end_idx
                 if (start_idx != -1) & (end_idx != -1):
                     label[start_idx:end_idx] = 1
-    "Dunlap's takeaway - this returns tokenized/encoded 512 vector where 'label' identifies the location of the " \
-    "features in the tokenized words (-1=ignore b/c special token, 1=label, 0=no label"
+    "Takeaway - this returns tokenized/encoded 512 vector where 'label' identifies the location of the features in the tokenized words (-1=ignore b/c special token, 1=label, 0=no label"
     return torch.tensor(label, dtype=torch.float)
 
 

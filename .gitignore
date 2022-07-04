@@ -6,17 +6,9 @@ input/deberta-v2-3-fast-tokenizer/deberta__init__.py
 input/deberta-v2-3-fast-tokenizer/tokenization_auto.py
 input/deberta-v2-3-fast-tokenizer/tokenization_deberta_v2_fast.py
 input/deberta-v2-3-fast-tokenizer/tokenization_deberta_v2.py
-# input/deberta-v2-3-fast-tokenizer/transformers__init__.py
-# input/microsoft/deberta-v3-large/config.json
 input/microsoft/deberta-v3-large/pytorch_model.bin
 input/microsoft/deberta-v3-large/spm.model
-# input/microsoft/deberta-v3-large/tokenizer_config.json
-# input/nbme-2wbvmzdp/2wbvmzdp_13kelj6x/config.json
-# input/nbme-2wbvmzdp/2wbvmzdp_13kelj6x/config.yaml
 input/nbme-2wbvmzdp/2wbvmzdp_13kelj6x/epoch=1-step=48385.ckpt
-# input/nbme-2wbvmzdp/2wbvmzdp_13kelj6x/inf_output_config.yaml
-# input/nbme-score-clinical-patient-notes/features.csv
 input/nbme-score-clinical-patient-notes/patient_notes.csv
-# input/nbme-score-clinical-patient-notes/sample_submission.csv
 input/nbme-score-clinical-patient-notes/test.csv
 input/nbme-score-clinical-patient-notes/train.csv

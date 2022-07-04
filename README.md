@@ -8,7 +8,7 @@ In the below images annotations and NER visualizations are shown using [spaCy](h
 
 In the below example  the spaCy "en_core_web_sm" english pipeline is used to perform a NER task. This pretrained pipeline consists of tok2vec, tagger, parser, ner, etc. In the below image named entities are assigned such as date, organization, cardinal, etc. Please note this pretrained model is not optimized to find the character spans for the labeled features and is simply a NER visualization example.
 
-![](https://github.com/mddunlap924/HuggingFace-NLP-NBME/blob/main/imgs/annotated_text.png)
+![](https://github.com/mddunlap924/HuggingFace-NLP-NBME/blob/main/imgs/visualize_ner.png)
 
 ## Custom Training and Fine-Tuning a Transformer Model
 
